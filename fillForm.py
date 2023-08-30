@@ -12,34 +12,37 @@ driver.get(os.environ.get('FORM_URL'))
 
 def authenticate():
 
-    # Find username and password input elements
+    # busco los elementos por id
     username_input = driver.find_element("id", "username")
     password_input = driver.find_element("id", "password")
-
-    # Find and click the login button
     login_button = driver.find_element("id", "loginbtn")
 
-    # Fill in the credentials and click login
+    # lleno los campos y logineo
     username_input.send_keys(os.environ.get('MAIL'))
     password_input.send_keys(os.environ.get('PASS'))
     login_button.click()
 
 
 def fillForm():
+
+    # busco los elementos por id
     question_one = driver.find_element("id", "auto-rb0001")
     dropdown = driver.find_element("id", "dropSelecciòn")
 
+    # busco el boton de submit por name porque no tiene id
     submit_button = driver.find_element("name", "submit")
 
-    question_one.click()
+    question_one.click() # click en la primera pregunta de multiple choice
+   
+    # como era un dropdown, tuve que hacerlo de esta forma
     dropdown.click()
 
-    # press down arrow
+    # flecha abajo 3 veces
     dropdown.send_keys(u'\ue015')
     dropdown.send_keys(u'\ue015')
     dropdown.send_keys(u'\ue015')
 
-    # press enter
+    # enter
     dropdown.send_keys(u'\ue007')
 
     submit_button.click()
