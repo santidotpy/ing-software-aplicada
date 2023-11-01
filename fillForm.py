@@ -24,32 +24,37 @@ def authenticate():
 
 
 def fillForm():
+    try:
+        authenticate()
+        # busco los elementos por id
+        question_one = driver.find_element("id", "auto-rb0001")
+        dropdown = driver.find_element("id", "dropSelecciòn")
 
-    # busco los elementos por id
-    question_one = driver.find_element("id", "auto-rb0001")
-    dropdown = driver.find_element("id", "dropSelecciòn")
+        # busco el boton de submit por name porque no tiene id
+        submit_button = driver.find_element("name", "submit")
 
-    # busco el boton de submit por name porque no tiene id
-    submit_button = driver.find_element("name", "submit")
+        question_one.click()  # click en la primera pregunta de multiple choice
 
-    question_one.click() # click en la primera pregunta de multiple choice
-   
-    # como era un dropdown, tuve que hacerlo de esta forma
-    dropdown.click()
+        # como era un dropdown, tuve que hacerlo de esta forma
+        dropdown.click()
 
-    # flecha abajo 3 veces
-    dropdown.send_keys(u'\ue015')
-    dropdown.send_keys(u'\ue015')
-    dropdown.send_keys(u'\ue015')
+        # flecha abajo 3 veces
+        dropdown.send_keys(u'\ue015')
+        dropdown.send_keys(u'\ue015')
+        dropdown.send_keys(u'\ue015')
 
-    # enter
-    dropdown.send_keys(u'\ue007')
+        # enter
+        dropdown.send_keys(u'\ue007')
 
-    submit_button.click()
+        submit_button.click()
+        print('Success')
+        driver.close()
+    except:
+        print("Error al llenar el formulario")
+        driver.close()
 
 
 if __name__ == "__main__":
-    authenticate()
+    # authenticate()
     fillForm()
-    time.sleep(5)
-    driver.close()
+    # time.sleep(5)
